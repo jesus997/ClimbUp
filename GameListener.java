@@ -21,7 +21,7 @@ public class GameListener implements Listener{
     static List<String> players = new ArrayList<String>();
     static CUMain plugin;
     public GameListener(CUMain plugin){
-        GameListener.plugin = plugin;
+        GameListener.plugin = plugin; 
     }
     
     // No tieren las cosas al morir
