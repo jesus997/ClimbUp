@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 public class Auxiliar {
 	public static int getNatural(String s, int defaul) {
 		try {
-			return Integer.getInteger(s);
+			return Integer.valueOf(s);
 		} catch (Exception e) {
 			return defaul;
 		}
