@@ -31,6 +31,7 @@ public class ArenaManager {
 	public ArenaManager(CUMain plugin) {
 		this.plugin = plugin;
 		pages = plugin.getConfig().getStringList("BookPages");
+		loadGame();
 	}
 
 	public ArenaManager() {
@@ -237,14 +238,26 @@ public class ArenaManager {
 
 		Arena a =createArena(i);
 
+		String lobb=section.getString("lobby");
+
+		if (lobb != null) {
+			a.setLobby(deserializeloc(lobb));
+		}
+		
+		String met=section.getString("meta");
+
+		if (met != null) {
+			a.setMeta(deserializeloc(met));
+		}
+		
 		List<String> spawns = section.getStringList("respawns");
+
 		if (spawns != null) {
 			Iterator<String> it = spawns.iterator();
 			while (it.hasNext()) {
 				a.addSpawn(deserializeloc(it.next()));
 			}
 		}
-		arenas.put(i, a);
 		return a;
 	}
 
@@ -275,7 +288,7 @@ public class ArenaManager {
 		Iterator<String> it = section.getKeys(false).iterator();
 		while (it.hasNext()) {
 			String next = it.next();
-			if (plugin.getConfig().isConfigurationSection(next)) {
+			if (section.isConfigurationSection(next)) {
 				int id = Auxiliar.getNatural(next, -1);
 				if (id > -1) {
 					Arena a = reloadArena(id,
